@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>طلاجات کاظی</title>
+<script>try{var t=localStorage.getItem('kt');if(t?t==='d':matchMedia('(prefers-color-scheme: dark)').matches)document.documentElement.classList.add('dark')}catch(e){}</script>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;600;800&family=Lalezar&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com/3.4.17"></script>
+<script>tailwind.config={darkMode:'class'}</script>
+<script src="https://cdn.jsdelivr.net/npm/react@18.3.1/umd/react.production.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/react-dom@18.3.1/umd/react-dom.production.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/htm@3.1.1/dist/htm.umd.js"></script>
+<style>
+:root{--bg:#F3F4EF;--card:#FFFFFF;--line:#E3E5DB;--fg:#12302A;--mut:#6B7A73;--gold:#B8892B;--deep:#0E2A24;--on:#F6E7B8;--bar:rgba(255,255,255,.86);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px)}
+html.dark{--bg:#08160F;--card:#0F2620;--line:#1E3D34;--fg:#EEF0E6;--mut:#8FA59B;--gold:#E0BB62;--deep:#0B1F1A;--on:#F6E7B8;--bar:rgba(11,31,26,.88);color-scheme:dark}
+html,body{height:100%}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:'Vazirmatn',Tahoma,sans-serif;transition:background .4s,color .4s}
+.card{background:var(--card);border:1px solid var(--line);border-radius:22px;transition:background .4s,border-color .4s}
+.mut{color:var(--mut)}.gt{color:var(--gold)}
+.brand{font-family:'Lalezar','Vazirmatn',serif}
+.btn{border-radius:999px;padding:.6rem 1.25rem;font-weight:600;transition:transform .15s,box-shadow .25s,filter .2s;cursor:pointer}
+.btn:active{transform:scale(.96)}.btn:hover{filter:brightness(1.07)}
+.btn-gold{background:linear-gradient(135deg,#F3D982,#C9972F 55%,#A87718);color:#2A1D03;box-shadow:0 6px 18px -6px rgba(201,151,47,.6)}
+.btn-dark{background:var(--deep);color:var(--on);border:1px solid var(--line)}
+.btn-ghost{border:1px solid var(--line);background:transparent;color:var(--fg)}
+.ingot{position:relative;overflow:hidden;background:linear-gradient(120deg,#FFF3C4 0%,#F0B90B 45%,#C98A00 100%);color:#2A1D03}
+.ingot::after{content:"";position:absolute;inset:0;background:linear-gradient(100deg,transparent 35%,rgba(255,255,255,.7) 50%,transparent 65%);transform:translateX(-120%);animation:sweep 5.5s ease-in-out infinite}
+@keyframes sweep{0%,55%{transform:translateX(-120%)}100%{transform:translateX(120%)}}
+@keyframes rise{from{transform:translateY(100%)}to{transform:none}}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+@keyframes pop{from{opacity:0;transform:translateY(10px) scale(.97)}to{opacity:1;transform:none}}
+@keyframes pulse{0%{r:3;opacity:1}100%{r:11;opacity:0}}
+@keyframes flashU{0%{color:#19c37d}100%{color:inherit}}@keyframes flashD{0%{color:#ff5a5f}100%{color:inherit}}
+.sheet{animation:rise .35s cubic-bezier(.2,.8,.2,1)}.veil{animation:fade .25s}.pg{animation:pop .4s cubic-bezier(.2,.8,.2,1)}
+.up{animation:flashU 1.2s}.dn{animation:flashD 1.2s}
+.tile{transition:transform .35s cubic-bezier(.2,.8,.2,1)}.tile:hover{transform:translateY(-4px)}
+.nav-a{color:var(--mut);transition:color .2s}.nav-a.on{color:var(--gold)}
+.tick{background:repeating-linear-gradient(90deg,var(--line) 0 1px,transparent 1px 12px)}
+input{outline:none}input:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+.scroll::-webkit-scrollbar{display:none}
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script>
+const {useState,useEffect,useMemo,useRef}=React;
+const h=htm.bind(React.createElement);
+const fa=n=>Math.round(n).toLocaleString('fa-IR');
+const faD=(n,d=2)=>Number(n).toLocaleString('fa-IR',{maximumFractionDigits:d});
+const P={home:"M3 11l9-8 9 8v10a1 1 0 01-1 1h-5v-6H9v6H4a1 1 0 01-1-1z",img:"M3 5h18v14H3zM3 16l5-5 4 4 3-3 6 6M9 9h.01",coin:"M12 3a9 9 0 100 18 9 9 0 000-18zM9 12h6M12 8v8",doc:"M6 3h9l4 4v14H6zM9 12h7M9 16h7",wallet:"M3 7h16a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2zM3 7l12-4v4M17 14h.01",bag:"M5 8h14l-1 13H6zM9 8a3 3 0 016 0",book:"M4 4h6a3 3 0 013 3v14a2 2 0 00-2-2H4zM20 4h-6a3 3 0 00-3 3v14a2 2 0 012-2h7z",user:"M12 12a4 4 0 100-8 4 4 0 000 8zM4 21a8 8 0 0116 0",sun:"M12 8a4 4 0 100 8 4 4 0 000-8zM12 2v2M12 20v2M4 12H2M22 12h-2M5 5l1.5 1.5M17.5 17.5L19 19M5 19l1.5-1.5M17.5 6.5L19 5",moon:"M20 14A8 8 0 0110 4a8 8 0 1010 10z",menu:"M4 6h16M4 12h16M4 18h16",plus:"M12 5v14M5 12h14",x:"M6 6l12 12M18 6L6 18",up:"M12 19V5M6 11l6-6 6 6",down:"M12 5v14M6 13l6 6 6-6",head:"M4 14v-2a8 8 0 0116 0v2M4 14h3v5H4zM17 14h3v5h-3z",out:"M9 4H5v16h4M16 8l4 4-4 4M20 12H9",shield:"M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z",gem:"M6 3h12l4 6-10 12L2 9zM2 9h20M9 3l3 6 3-6M12 21V9",back:"M9 5l7 7-7 7"};
+const I=({n,c='w-5 h-5'})=>h`<svg className=${c} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><path d=${P[n]}/></svg>`;
+const Logo=({s=44})=>h`<svg width=${s} height=${s} viewBox="0 0 48 48"><defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F3D982"/><stop offset="1" stop-color="#A87718"/></linearGradient></defs><rect x="6" y="6" width="36" height="36" rx="8" transform="rotate(45 24 24)" fill="#0B1F1A" stroke="url(#lg)" strokeWidth="2"/><text x="24" y="31" textAnchor="middle" fontSize="22" fill="url(#lg)" fontFamily="Lalezar">ک</text></svg>`;
+
+const NAV=[['home','داشبورد','home'],['gallery','گالری','img'],['coins','سکه','coin'],['reports','گزارشات','doc']];
+const MORE=[['wallet','کیف پول','wallet'],['shop','محصولات','bag'],['articles','مقالات','book'],['profile','حساب کاربری','user']];
+const PRODUCTS=[['انگشتر رز‌گلد نگین‌دار','انگشتر',3.2,'18'],['گردنبند قلب ظریف','گردنبند',2.1,'18'],['دستبند ایتالیایی','دستبند',5.4,'18'],['گوشواره آویز مروارید','گوشواره',2.8,'18'],['شمش طلای ۱۰ گرمی','شمش',10,'24'],['النگو طرح کارتیه','النگو',8.6,'18'],['ست عروس سلطنتی','ست',24,'18'],['سرویس کلاسیک','ست',18.5,'18']];
+const COINS=[['سکه یک گرمی',38000000,1],['ربع سکه',72500000,0.25],['نیم سکه',139400000,0.5],['سکه تمام بهار آزادی',276000000,1]];
+const ARTS=[['راهنمای خرید طلای آب‌شده','خرید','تفاوت طلای ۱۸ و ۲۴ عیار، اجرت و سود ساخت را بشناسید.','طلای آب‌شده بدون اجرت و مالیات ساخت عرضه می‌شود و برای سرمایه‌گذاری بلندمدت مناسب است. هنگام خرید به عیار، وزن و اعتبار فروشنده دقت کنید.'],['نگهداری درست از جواهرات','نگهداری','با چند عادت ساده، درخشش طلا سال‌ها حفظ می‌شود.','جواهرات را جدا از هم نگه دارید، از تماس با مواد شوینده دور کنید و گاهی با آب ولرم و صابون ملایم بشویید.'],['سرمایه‌گذاری در سکه یا شمش؟','بازار','مقایسه نقدشوندگی، اختلاف قیمت و هزینه نگهداری.','سکه نقدشوندگی بالاتری دارد اما حباب قیمتی دارد. شمش به ارزش ذاتی طلا نزدیک‌تر است و برای مبالغ بالا اقتصادی‌تر است.'],['راهنمای انتخاب حلقه عروسی','راهنما','از عیار تا طرح؛ هر آنچه پیش از خرید لازم است.','برای استفاده روزانه، طلای ۱۸ عیار مقاومت بهتری دارد. اندازه انگشت را در پایان روز بگیرید تا دقیق‌تر باشد.']];
+const GAL=[['حلقه‌ها','#F3D982,#A87718'],['گردنبندها','#E8C4A0,#9B6B3A'],['سرویس عروس','#F0E2A8,#B8892B'],['النگوها','#EBCB74,#8A5F0E'],['سکه‌ها','#FFE9A0,#C98A00'],['گوشواره‌ها','#F1D9B5,#B07A3A']];
+const TITLES={home:'داشبورد',gallery:'گالری',coins:'سکه',reports:'گزارشات',wallet:'کیف پول',shop:'محصولات',articles:'مقالات',profile:'حساب کاربری'};
+
+function Chart({data,range}){
+  const mn=Math.min(...data),mx=Math.max(...data),W=300,H=110;
+  const pts=data.map((v,i)=>[i*W/(data.length-1),8+(1-(v-mn)/(mx-mn||1))*(H-16)]);
+  const d=pts.map((p,i)=>(i?'L':'M')+p[0].toFixed(1)+' '+p[1].toFixed(1)).join(' ');
+  const l=pts[pts.length-1];
+  return h`<div><div className="flex justify-between text-[11px] mut mb-1"><span>${fa(mx)}</span><span>${range}</span></div>
+  <svg viewBox="0 0 300 110" className="w-full tick rounded-lg" key=${range} style=${{direction:'ltr'}}><defs><linearGradient id="cf" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E0BB62" stop-opacity=".45"/><stop offset="1" stop-color="#E0BB62" stop-opacity="0"/></linearGradient></defs>
+  <path d=${d+' L300 110 L0 110Z'} fill="url(#cf)"/><path d=${d} fill="none" stroke="#C9972F" strokeWidth="2" strokeLinejoin="round" pathLength="1" strokeDasharray="1" strokeDashoffset="0" style=${{animation:'fade .8s'}}/>
+  <circle cx=${l[0]} cy=${l[1]} r="3.5" fill="#C9972F"/><circle cx=${l[0]} cy=${l[1]} fill="none" stroke="#C9972F" style=${{animation:'pulse 1.8s infinite'}}/></svg>
+  <div className="text-[11px] mut mt-1">${fa(mn)}</div></div>`;
+}
+
+function Modal({title,onClose,children}){
+  return h`<div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center veil" style=${{background:'rgba(4,12,9,.62)',backdropFilter:'blur(4px)'}} onClick=${onClose}>
+  <div className="card sheet w-full sm:max-w-md p-5 sm:rounded-[22px] rounded-b-none" style=${{paddingBottom:'calc(1.25rem + env(safe-area-inset-bottom,0px))'}} onClick=${e=>e.stopPropagation()}>
+  <div className="flex items-center justify-between mb-4"><b className="text-lg">${title}</b><button aria-label="بستن" onClick=${onClose} className="mut"><${I} n="x"/></button></div>${children}</div></div>`;
+}
+
+function Trade({kind,S,onClose}){
+  const buy=kind==='buy',price=buy?S.buy:S.sell;
+  const [mode,setMode]=useState('g');const [v,setV]=useState('');
+  const num=parseFloat(String(v).replace(/[۰-۹]/g,c=>'۰۱۲۳۴۵۶۷۸۹'.indexOf(c)))||0;
+  const g=mode==='g'?num:num/price,cost=g*price;
+  let err='';
+  if(num>0){ if(g>5000)err='سقف هر معامله ۵٬۰۰۰ گرم است.'; else if(buy&&cost>S.wallet)err='موجودی کیف پول کافی نیست. ابتدا موجودی را افزایش دهید.'; else if(!buy&&g>S.gold+1e-9)err='موجودی طلای شما کافی نیست.'; else if(g<0.001)err='حداقل مقدار معامله ۰٫۰۰۱ گرم است.';}
+  const ok=num>0&&!err;
+  return h`<${Modal} title=${buy?'خرید طلای آب‌شده':'فروش طلای آب‌شده'} onClose=${onClose}>
+  <div className="flex gap-2 mb-3">${[['g','بر اساس گرم'],['t','بر اساس تومان']].map(([k,l])=>h`<button key=${k} onClick=${()=>{setMode(k);setV('')}} className=${'btn flex-1 text-sm '+(mode===k?'btn-gold':'btn-ghost')}>${l}</button>`)}</div>
+  <div className="card flex items-center px-4 py-3 mb-3" style=${{borderRadius:16}}><input inputMode="decimal" value=${v} onInput=${e=>setV(e.target.value)} placeholder=${mode==='g'?'مثلاً ۲٫۵':'مثلاً ۵۰۰۰۰۰۰'} className="bg-transparent flex-1 text-xl w-full" autoFocus/><span className="mut text-sm">${mode==='g'?'گرم':'تومان'}</span></div>
+  <div className="flex gap-2 mb-4">${(mode==='g'?[1,5,10]:[1e6,1e7,5e7]).map(x=>h`<button key=${x} className="btn btn-ghost text-xs flex-1" onClick=${()=>setV(String(x))}>${faD(x)}</button>`)}</div>
+  <div className="text-sm space-y-1.5 mb-4"><div className="flex justify-between"><span className="mut">قیمت هر گرم</span><span>${fa(price)} تومان</span></div><div className="flex justify-between"><span className="mut">مقدار طلا</span><span>${faD(g,3)} گرم</span></div><div className="flex justify-between font-semibold"><span>${buy?'مبلغ قابل پرداخت':'مبلغ دریافتی'}</span><span className="gt">${fa(cost)} تومان</span></div></div>
+  ${err&&h`<p className="text-sm text-red-500 mb-3">${err}</p>`}
+  <button disabled=${!ok} className=${'btn w-full '+(buy?'btn-gold':'')} style=${buy?{opacity:ok?1:.45}:{background:'#E5484D',color:'#fff',opacity:ok?1:.45}} onClick=${()=>{S.trade(buy,g,cost);onClose()}}>${buy?'تأیید و خرید':'تأیید و فروش'}</button><//>`;
+}
+
+function Money({kind,S,onClose}){
+  const dep=kind==='dep';const [v,setV]=useState('');
+  const n=parseFloat(String(v).replace(/[۰-۹]/g,c=>'۰۱۲۳۴۵۶۷۸۹'.indexOf(c)))||0;
+  const err=n>0&&(n<100000?'حداقل مبلغ ۱۰۰٬۰۰۰ تومان است.':(!dep&&n>S.wallet?'مبلغ بیشتر از موجودی است.':''));
+  return h`<${Modal} title=${dep?'افزایش موجودی':'برداشت از کیف پول'} onClose=${onClose}>
+  <div className="card flex items-center px-4 py-3 mb-3" style=${{borderRadius:16}}><input inputMode="numeric" value=${v} onInput=${e=>setV(e.target.value)} placeholder="مبلغ به تومان" className="bg-transparent flex-1 text-xl w-full"/><span className="mut text-sm">تومان</span></div>
+  <div className="flex gap-2 mb-4">${[1e6,5e6,2e7].map(x=>h`<button key=${x} className="btn btn-ghost text-xs flex-1" onClick=${()=>setV(String(x))}>${fa(x)}</button>`)}</div>
+  ${err&&h`<p className="text-sm text-red-500 mb-3">${err}</p>`}
+  <button disabled=${!(n>0&&!err)} className="btn btn-gold w-full" style=${{opacity:n>0&&!err?1:.45}} onClick=${()=>{S.money(dep,n);onClose()}}>${dep?'پرداخت آنلاین':'ثبت درخواست برداشت'}</button>
+  ${dep&&h`<p className="text-xs mut mt-3 text-center">شما به درگاه امن بانکی منتقل می‌شوید (نمایشی).</p>`}<//>`;
+}
+
+function Home({S}){
+  const [rg,setRg]=useState('روزانه');
+  const data=S.hist[rg];
+  const dir=S.dir;
+  return h`<div className="grid lg:grid-cols-2 gap-4 pg">
+  <div className="lg:col-span-2 rounded-2xl px-4 py-3 text-sm flex items-center gap-2" style=${{background:'rgba(224,187,98,.14)',color:'var(--gold)'}}><${I} n="shield" c="w-4 h-4 shrink-0"/>معاملات هر روز از ساعت ۱۱:۳۰ تا ۲۱:۳۰ و تا سقف ۵۰۰۰ گرم انجام می‌شود.</div>
+  <div className="card p-5 flex items-center justify-between"><div><div className="mut text-sm mb-1">موجودی کیف پول</div><div className="text-2xl font-semibold">${fa(S.wallet)} <span className="text-sm mut font-normal">تومان</span></div></div><button className="btn btn-dark text-sm flex items-center gap-1.5" onClick=${()=>S.open('dep')}><${I} n="plus" c="w-4 h-4"/>افزایش موجودی</button></div>
+  <div className="ingot rounded-[22px] p-5 flex items-center justify-between"><div><div className="text-sm opacity-80 mb-1">موجودی طلا</div><div className="text-2xl font-extrabold">${faD(S.gold,3)} <span className="text-sm font-normal">گرم</span></div><div className="text-xs opacity-70 mt-1">ارزش تقریبی ${fa(S.gold*S.sell)} تومان</div></div><button className="btn bg-white/90 text-sm flex items-center gap-1.5 relative z-10" style=${{color:'#2A1D03'}} onClick=${()=>S.open('buy')}><${I} n="plus" c="w-4 h-4"/>خرید طلا</button></div>
+  <div className="lg:col-span-2 grid grid-cols-2 gap-3">${[['سکه یک گرمی',38000000],['سکه نیم',139400000]].map(([t,p])=>h`<button key=${t} onClick=${()=>S.go('coins')} className="tile rounded-[22px] p-4 text-right flex items-center justify-between" style=${{background:'linear-gradient(135deg,#0B1F1A,#17382F)',border:'1px solid #2C4F44'}}><div><div className="gt text-sm mb-1">${t}</div><div className="text-white font-semibold text-sm">${fa(p)} <span className="text-[11px] opacity-70">تومان</span></div></div><span className="w-10 h-10 rounded-full shrink-0" style=${{background:'radial-gradient(circle at 30% 30%,#FFF1B8,#C9972F 60%,#8A5F0E)'}}></span></button>`)}</div>
+  ${[['buy','قیمت خرید (گرم)',S.buy,'خرید','#19B67B','down'],['sell','قیمت فروش (گرم)',S.sell,'فروش','#E5484D','up']].map(([k,l,p,b,c,ic])=>h`<div key=${k} className="card p-5 text-center"><div className="flex items-center justify-center gap-2 text-sm mut mb-3"><span style=${{color:c}}><${I} n=${ic}/></span>${l}</div><div className=${'text-2xl font-semibold mb-4 '+(dir[k]>0?'up':dir[k]<0?'dn':'')} key=${p}>${fa(p)} <span className="text-sm mut font-normal">تومان</span></div><button className="btn text-white px-10" style=${{background:c,boxShadow:'0 8px 18px -8px '+c}} onClick=${()=>S.open(k)}>${b}</button></div>`)}
+  <div className="card p-5 lg:col-span-2"><div className="flex items-center justify-between mb-3"><b>نمودار لحظه‌ای قیمت طلا</b><div className="flex gap-1.5">${['روزانه','هفته','ماه'].map(r=>h`<button key=${r} onClick=${()=>setRg(r)} className=${'btn text-xs !px-3 !py-1 '+(rg===r?'btn-gold':'btn-ghost')}>${r}</button>`)}</div></div><${Chart} data=${data} range=${rg}/></div>
+  <button onClick=${()=>S.toast('پشتیبانی از ساعت ۹ تا ۲۱ پاسخگوست.')} className="lg:col-span-2 flex items-center justify-center gap-2 text-sm gt py-1"><${I} n="head"/>پشتیبانی طلاجات کاظی</button></div>`;
+}
+
+function Gallery({S}){
+  const [sel,setSel]=useState(null);
+  return h`<div className="pg"><div className="grid grid-cols-2 md:grid-cols-3 gap-3">${GAL.map(([t,c],i)=>{const [a,b]=c.split(',');return h`<button key=${t} onClick=${()=>setSel(i)} className=${'tile relative overflow-hidden rounded-[22px] text-right p-4 '+(i%3===0?'aspect-[4/5]':'aspect-square')} style=${{background:`linear-gradient(150deg,${a},${b})`}}><div className="absolute -left-6 -bottom-6 opacity-25" style=${{color:'#2A1D03'}}><${I} n="gem" c="w-36 h-36"/></div><b className="relative text-[#2A1D03]">${t}</b></button>`})}</div>
+  ${sel!==null&&h`<${Modal} title=${GAL[sel][0]} onClose=${()=>setSel(null)}><div className="rounded-2xl h-56 flex items-center justify-center mb-4" style=${{background:`linear-gradient(150deg,${GAL[sel][1]})`,color:'#2A1D03'}}><${I} n="gem" c="w-24 h-24"/></div><p className="text-sm mut mb-4">نمونه‌ای از کارهای ساخته‌شده در کارگاه طلاجات کاظی. برای سفارش ساخت طرح مشابه با ما تماس بگیرید.</p><div className="flex gap-2"><button className="btn btn-gold flex-1" onClick=${()=>{S.go('shop');setSel(null)}}>مشاهده محصولات</button><button className="btn btn-ghost flex-1" onClick=${()=>{S.toast('درخواست مشاوره ثبت شد.');setSel(null)}}>درخواست مشاوره</button></div><//>`}</div>`;
+}
+
+function Shop({S}){
+  const [cat,setCat]=useState('همه');const cats=['همه',...new Set(PRODUCTS.map(p=>p[1]))];
+  return h`<div className="pg"><div className="flex gap-2 overflow-x-auto scroll pb-3">${cats.map(c=>h`<button key=${c} onClick=${()=>setCat(c)} className=${'btn text-sm whitespace-nowrap '+(cat===c?'btn-gold':'btn-ghost')}>${c}</button>`)}</div>
+  <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-3">${PRODUCTS.filter(p=>cat==='همه'||p[1]===cat).map(([n,c,w,k])=>{const price=w*S.buy*(k==='24'?1.03:1.18);return h`<div key=${n} className="card tile overflow-hidden"><div className="h-28 flex items-center justify-center" style=${{background:'linear-gradient(150deg,#F3D982,#B8892B)',color:'#2A1D03'}}><${I} n="gem" c="w-12 h-12"/></div><div className="p-3"><div className="text-sm font-semibold leading-6 min-h-[3rem]">${n}</div><div className="text-xs mut">${faD(w)} گرم · عیار ${faD(k)}</div><div className="gt font-semibold my-2 text-sm">${fa(price)} <span className="text-[10px] mut">تومان</span></div><button className="btn btn-dark w-full text-xs !py-2" onClick=${()=>S.buyItem(n,price)}>افزودن و خرید</button></div></div>`})}</div></div>`;
+}
+
+function Coins({S}){
+  return h`<div className="pg grid md:grid-cols-2 gap-3">${COINS.map(([n,p])=>h`<div key=${n} className="card p-4 flex items-center gap-4"><span className="w-14 h-14 rounded-full shrink-0" style=${{background:'radial-gradient(circle at 30% 30%,#FFF1B8,#C9972F 60%,#8A5F0E)',boxShadow:'0 6px 16px -6px #C9972F'}}></span><div className="flex-1"><b>${n}</b><div className="gt font-semibold text-sm mt-1">${fa(p*(1+S.drift))} تومان</div></div><button className="btn btn-gold text-sm" onClick=${()=>S.buyItem(n,p*(1+S.drift))}>خرید</button></div>`)}</div>`;
+}
+
+function Wallet({S}){
+  return h`<div className="pg space-y-4"><div className="ingot rounded-[22px] p-6"><div className="text-sm opacity-80">موجودی قابل برداشت</div><div className="text-3xl font-extrabold my-2">${fa(S.wallet)} <span className="text-base font-normal">تومان</span></div><div className="flex gap-2 mt-4 relative z-10"><button className="btn flex-1 bg-[#0B1F1A] text-[#F6E7B8]" onClick=${()=>S.open('dep')}>افزایش موجودی</button><button className="btn flex-1 bg-white/80" style=${{color:'#2A1D03'}} onClick=${()=>S.open('wd')}>برداشت</button></div></div>
+  <${Txs} S=${S} limit=${6} title="آخرین تراکنش‌ها"/></div>`;
+}
+function Txs({S,limit,title}){
+  const l=S.txs.slice(0,limit||99);
+  return h`<div className="card p-4"><b className="block mb-3">${title}</b>${l.length?l.map(t=>h`<div key=${t.id} className="flex items-center gap-3 py-3 border-b last:border-0" style=${{borderColor:'var(--line)'}}><span className="w-9 h-9 rounded-full flex items-center justify-center" style=${{background:t.in?'rgba(25,182,123,.15)':'rgba(229,72,77,.15)',color:t.in?'#19B67B':'#E5484D'}}><${I} n=${t.in?'down':'up'} c="w-4 h-4"/></span><div className="flex-1 text-sm"><div>${t.t}</div><div className="text-xs mut">${t.d}</div></div><b className=${'text-sm '+(t.in?'text-emerald-500':'')}>${t.in?'+':'−'}${fa(t.a)}</b></div>`):h`<p className="text-sm mut py-6 text-center">هنوز تراکنشی ثبت نشده است. با افزایش موجودی شروع کنید.</p>`}</div>`;
+}
+function Reports({S}){
+  const bought=S.txs.filter(t=>t.k==='buy').reduce((a,t)=>a+t.g,0),sold=S.txs.filter(t=>t.k==='sell').reduce((a,t)=>a+t.g,0);
+  return h`<div className="pg space-y-4"><div className="grid grid-cols-3 gap-3">${[['خرید',faD(bought,3)+' گرم'],['فروش',faD(sold,3)+' گرم'],['تراکنش‌ها',fa(S.txs.length)]].map(([a,b])=>h`<div key=${a} className="card p-3 text-center"><div className="text-xs mut mb-1">${a}</div><b className="gt text-sm">${b}</b></div>`)}</div><${Txs} S=${S} title="تاریخچه کامل"/></div>`;
+}
+function Articles(){
+  const [o,setO]=useState(null);
+  if(o!==null){const a=ARTS[o];return h`<div className="pg card p-5 max-w-2xl"><button onClick=${()=>setO(null)} className="gt text-sm flex items-center gap-1 mb-4"><${I} n="back" c="w-4 h-4"/>بازگشت به مقالات</button><h2 className="brand text-3xl mb-3 leading-snug">${a[0]}</h2><p className="leading-9 mut">${a[2]} ${a[3]}</p></div>`}
+  return h`<div className="pg grid md:grid-cols-2 gap-3">${ARTS.map((a,i)=>h`<button key=${i} onClick=${()=>setO(i)} className="card tile p-5 text-right"><span className="text-xs gt">${a[1]}</span><div className="font-semibold my-2 leading-7">${a[0]}</div><p className="text-sm mut leading-7">${a[2]}</p></button>`)}</div>`;
+}
+function Profile({S}){
+  return h`<div className="pg max-w-xl space-y-3"><div className="card p-5 flex items-center gap-4"><span className="w-16 h-16 rounded-full flex items-center justify-center brand text-2xl" style=${{background:'var(--deep)',color:'var(--on)'}}>م</span><div><b>مهمان کاظی</b><div className="text-xs mut mt-1">۰۹۱۲ ۱۲۳ ۴۵۶۷</div></div><span className="mr-auto text-xs px-3 py-1 rounded-full" style=${{background:'rgba(224,187,98,.16)',color:'var(--gold)'}}>احراز هویت نشده</span></div>
+  ${[['احراز هویت','تکمیل اطلاعات و کارت ملی','shield',()=>S.toast('فرم احراز هویت به‌زودی فعال می‌شود.')],['کیف پول','مدیریت موجودی','wallet',()=>S.go('wallet')],['پشتیبانی','گفتگو با کارشناس','head',()=>S.toast('در حال اتصال به پشتیبان…')],['خروج از حساب','','out',()=>S.toast('از حساب خارج شدید.')]].map(([t,s,ic,f])=>h`<button key=${t} onClick=${f} className="card w-full p-4 flex items-center gap-3 text-right tile"><span className="gt"><${I} n=${ic}/></span><div><div className="text-sm font-semibold">${t}</div>${s&&h`<div className="text-xs mut">${s}</div>`}</div></button>`)}</div>`;
+}
+
+function App(){
+  const [page,setPage]=useState('home');
+  const [dark,setDark]=useState(document.documentElement.classList.contains('dark'));
+  const [menu,setMenu]=useState(false);const [modal,setModal]=useState(null);const [msg,setMsg]=useState('');
+  const [wallet,setWallet]=useState(0),[gold,setGold]=useState(0),[txs,setTxs]=useState([]);
+  const [drift,setDrift]=useState(0),[dir,setDir]=useState({buy:0,sell:0});
+  const base=useMemo(()=>{let v=25.95e6;return Array.from({length:48},()=>v+=(Math.random()-.58)*5e4)},[]);
+  const buy=25823000*(1+drift),sell=25715000*(1+drift);
+  const hist=useMemo(()=>({'روزانه':[...base.slice(-24),buy],'هفته':base.filter((_,i)=>i%2===0).map(x=>x*.99).concat(buy),'ماه':base.map((x,i)=>x*(0.97+i*.0006)).concat(buy)}),[drift]);
+  useEffect(()=>{const id=setInterval(()=>setDrift(d=>{const n=Math.max(-.01,Math.min(.01,d+(Math.random()-.5)*.0008));setDir({buy:n-d,sell:n-d});return n}),4000);return()=>clearInterval(id)},[]);
+  useEffect(()=>{document.documentElement.classList.toggle('dark',dark);try{localStorage.setItem('kt',dark?'d':'l')}catch(e){}},[dark]);
+  useEffect(()=>{if(msg){const t=setTimeout(()=>setMsg(''),2600);return()=>clearTimeout(t)}},[msg]);
+  useEffect(()=>{window.scrollTo(0,0)},[page]);
+  const add=(t,a,inn,x={})=>setTxs(l=>[{id:Date.now()+Math.random(),t,a,in:inn,d:new Date().toLocaleString('fa-IR',{dateStyle:'medium',timeStyle:'short'}),...x},...l]);
+  const S={wallet,gold,txs,buy,sell,drift,dir,hist,toast:setMsg,go:p=>{setPage(p);setMenu(false)},open:setModal,
+    trade:(b,g,c)=>{if(b){setWallet(w=>w-c);setGold(x=>x+g)}else{setWallet(w=>w+c);setGold(x=>x-g)}add((b?'خرید ':'فروش ')+faD(g,3)+' گرم طلا',c,!b,{k:b?'buy':'sell',g});setMsg(b?'خرید با موفقیت انجام شد.':'فروش با موفقیت انجام شد.')},
+    money:(d,n)=>{setWallet(w=>d?w+n:w-n);add(d?'افزایش موجودی':'برداشت از کیف پول',n,d);setMsg(d?'موجودی کیف پول افزایش یافت.':'درخواست برداشت ثبت شد.')},
+    buyItem:(n,p)=>{if(p>wallet){setMsg('موجودی کافی نیست؛ ابتدا کیف پول را شارژ کنید.');setModal('dep');return}setWallet(w=>w-p);add('خرید '+n,p,false,{k:'item'});setMsg('«'+n+'» خریداری شد.')}};
+  const View={home:Home,gallery:Gallery,coins:Coins,reports:Reports,wallet:Wallet,shop:Shop,articles:Articles,profile:Profile}[page];
+  const Link=([k,l,ic])=>h`<button key=${k} onClick=${()=>S.go(k)} className=${'nav-a flex items-center gap-3 '+(page===k?'on':'')} aria-current=${page===k?'page':undefined}><${I} n=${ic}/><span className="text-sm">${l}</span></button>`;
+  return h`<div className="min-h-screen lg:flex">
+  <aside className="hidden lg:flex flex-col gap-5 w-64 p-6 sticky top-0 h-screen border-l" style=${{borderColor:'var(--line)'}}>
+    <div className="flex items-center gap-3"><${Logo} s=${52}/><div><div className="brand text-2xl gt leading-none">طلاجات کاظی</div><div className="text-[11px] mut mt-1">گالری طلا و جواهر</div></div></div>
+    <nav className="flex flex-col gap-4 mt-6">${[...NAV.slice(0,1),...MORE.slice(0,3),...NAV.slice(1)].map(Link)}</nav>
+    <button onClick=${()=>setDark(!dark)} className="btn btn-ghost mt-auto flex items-center justify-center gap-2 text-sm"><${I} n=${dark?'sun':'moon'}/>${dark?'حالت روشن':'حالت تیره'}</button></aside>
+  <div className="flex-1 min-w-0"><header className="sticky top-0 z-30 flex items-center justify-between px-4 py-3 lg:px-8" style=${{background:'var(--bar)',backdropFilter:'blur(14px)',paddingTop:'calc(.75rem + env(safe-area-inset-top,0px))',borderBottom:'1px solid var(--line)'}}>
+    <button className="lg:hidden" aria-label="منو" onClick=${()=>setMenu(true)}><${I} n="menu" c="w-6 h-6"/></button>
+    <div className="lg:hidden flex items-center gap-2"><${Logo} s=${34}/><span className="brand text-xl gt">طلاجات کاظی</span></div>
+    <h1 className="hidden lg:block font-semibold text-lg">${TITLES[page]}</h1>
+    <div className="flex items-center gap-3"><button aria-label="تغییر تم" onClick=${()=>setDark(!dark)} className="lg:hidden mut"><${I} n=${dark?'sun':'moon'}/></button><button aria-label="حساب کاربری" onClick=${()=>S.go('profile')} className="gt"><${I} n="user" c="w-6 h-6"/></button></div></header>
+  <main className="px-4 lg:px-8 py-5 pb-28 lg:pb-10 max-w-5xl mx-auto" key=${page}>${page!=='home'&&h`<h2 className="lg:hidden font-semibold mb-4">${TITLES[page]}</h2>`}<${View} S=${S}/></main></div>
+  <nav className="lg:hidden fixed bottom-0 inset-x-0 z-30 flex justify-around pt-3 rounded-t-[26px]" style=${{background:'var(--bar)',backdropFilter:'blur(14px)',border:'1px solid var(--line)',paddingBottom:'calc(.75rem + env(safe-area-inset-bottom,0px))'}}>${NAV.map(([k,l,ic])=>h`<button key=${k} onClick=${()=>S.go(k)} className=${'nav-a flex flex-col items-center gap-1 '+(page===k?'on':'')}><${I} n=${ic} c="w-6 h-6"/><span className="text-[11px]">${l}</span></button>`)}</nav>
+  ${menu&&h`<div className="fixed inset-0 z-40 veil" style=${{background:'rgba(4,12,9,.6)'}} onClick=${()=>setMenu(false)}><div className="card sheet h-full w-72 p-6 flex flex-col gap-5 mr-0 ml-auto" style=${{borderRadius:'22px 0 0 22px',animation:'pop .3s'}} onClick=${e=>e.stopPropagation()}><div className="flex items-center gap-3"><${Logo}/><b className="brand text-2xl gt">طلاجات کاظی</b></div>${[...NAV,...MORE].map(Link)}</div></div>`}
+  ${modal==='buy'&&h`<${Trade} kind="buy" S=${S} onClose=${()=>setModal(null)}/>`}${modal==='sell'&&h`<${Trade} kind="sell" S=${S} onClose=${()=>setModal(null)}/>`}
+  ${(modal==='dep'||modal==='wd')&&h`<${Money} kind=${modal} S=${S} onClose=${()=>setModal(null)}/>`}
+  ${msg&&h`<div role="status" className="fixed z-[60] left-1/2 -translate-x-1/2 bottom-24 lg:bottom-8 px-5 py-3 rounded-full text-sm pg" style=${{background:'var(--deep)',color:'var(--on)',border:'1px solid var(--gold)',boxShadow:'0 10px 30px -10px #000'}}>${msg}</div>`}</div>`;
+}
+ReactDOM.createRoot(document.getElementById('root')).render(h`<${App}/>`);
+</script>
+</body>
+</html>
